@@ -18,6 +18,7 @@ package rip.reflex.autoban.util.action;
 
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.action.impl.ActionPlayBanAnimation;
 import rip.reflex.autoban.util.action.impl.ActionRunCommand;
 import rip.reflex.autoban.util.action.impl.ActionWait;
 
@@ -40,6 +41,7 @@ public class Actions {
     public static void init() {
         register(new ActionRunCommand());
         register(new ActionWait());
+        register(new ActionPlayBanAnimation());
     }
 
     /**
@@ -71,7 +73,7 @@ public class Actions {
             ReflexAutoban.getInstance().getLog().warn("Undefined action '" + op + "'");
             return ActionState.ERROR;
         } catch (final Exception ex) {
-            ReflexAutoban.getInstance().getLog().warn(String.format("Error running action '%s' with %s arguments. Make sure to check your syntax!", op, (args == null) ? "NULL" : args.length));
+            ReflexAutoban.getInstance().getLog().warn(String.format("Error running action '%s' with %s arguments. Make sure to check your syntax!", op, (args == null) ? "<NULL>" : args.length));
             Misc.printStackTrace(ex);
 
             return ActionState.ERROR;

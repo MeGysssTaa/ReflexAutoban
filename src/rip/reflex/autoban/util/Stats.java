@@ -39,11 +39,18 @@ public class Stats {
     @Getter
     private int pkc, prePkc;
 
+    /**
+     * Add player one more potential kick.
+     * @return the new amount of potential kicks.
+     */
     public int addPK() {
         prePkc = pkc;
         return pkc += 1;
     }
 
+    /**
+     * Reset the amount of potential kicks this player has.
+     */
     public Stats resetPKC() {
         prePkc = pkc = 0;
         return this;

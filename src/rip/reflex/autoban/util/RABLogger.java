@@ -76,18 +76,13 @@ public class RABLogger {
     }
 
     /**
-     * Do the following magic with the given string:
-     *     - add prefix from config
-     *     - translate inner encodings (like {ban_bc}, {pk_notify}, etc.)
-     *     - translate color codes
-     *     - set placeholders (ReflexAutoban's and PlaceholderAPI's)
+     * Format the given string.
      *
      * @param s The string to format
      * @return The formatted string
      */
     private String format(final String s) {
-        // TODO > Everything...
-        return Strings.removeColorCodes(s);
+        return "[ReflexAutoban] " + Strings.removeColorCodes(s);
     }
 
 }

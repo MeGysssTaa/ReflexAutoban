@@ -84,7 +84,6 @@ actions:
   #          '@sync' ARGUMENT IN ALL ACTIONS STRINGS BELOW
   #          OR INSERT A 'ALL_SYNC' ACTION AT THE TOP!
   ban_wave:
-  - "PLAY_BAN_ANIMATION 0 %player%"
   - "RUN_COMMAND reflex ban %player% 30d
   &c&lYour account is suspended.&r%break%%break%
   The &b&lREFLEX ANTICHEATING SYSTEM&r has classified you as a possible cheater &7(%id%)&r.%break%

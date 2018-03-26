@@ -18,8 +18,14 @@ package rip.reflex.autoban.util.action;
 
 public class Flow {
 
+    /**
+     * Force the target action to run in the primary thread
+     */
     public static final String SYNC         = "sync";
 
+    /**
+     * Force the target action to run off the primary thread
+     */
     public static final String ASYNC        = "async";
 
 }

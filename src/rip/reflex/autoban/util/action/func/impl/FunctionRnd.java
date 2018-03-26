@@ -37,7 +37,7 @@ public class FunctionRnd extends AbstractFunction {
     @Override
     protected String exec0(final String[] args) throws Exception {
         if ((args == null) || (args.length != 2))
-            throw new IllegalArgumentException("Function RND expected 2 arguments, but got " + ((args == null) ? "NULL" : args.length));
+            throw new IllegalArgumentException("Function RND expected 2 arguments, but got " + ((args == null) ? "<NULL>" : args.length));
 
         final String strMin = args[0], strMax = args[1];
         final int min, max;

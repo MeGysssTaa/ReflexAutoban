@@ -86,11 +86,18 @@ public class ActionInterpreter {
 
     /**
      * Execute the given single Action updating its state.
+     * Special case: if the action operator is ALL_SYNC or ALL_ASYNC, nothing
+     *               will be done and the DONE result will be returned.
      *
      * @param a The Action to execute.
      * @return Action quit state (DONE in case of success or ERROR in case of an unexpected error)
      */
     private int runAction(final Action a) {
+        if ((a.getOp().equals(ALL_SYNC)) || (a.getOp().equals(ALL_ASYNC))) {
+            a.setCurrentState(ActionState.DONE);
+            return a.getCurrentState();
+        }
+
         try {
             a.setCurrentState(ActionState.RUNNING);
             a.setCurrentState(Actions.run(a.getOp(), a.getArgs()));

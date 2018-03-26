@@ -21,7 +21,6 @@ import org.bukkit.entity.Player;
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.util.placeholders.PlaceholderAPIHook;
 
-import java.util.Collections;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -95,12 +94,6 @@ public class Strings {
         return replace(new String(chars), "\u0000", "");
     }
 
-    public static String tab(final String s, final int tabLoc) {
-        if (s.length() >= tabLoc)
-            throw new IllegalArgumentException("String must be shorter than tab length");
-        return s + String.join("", Collections.nCopies(tabLoc - s.length(), " "));
-    }
-
     public static String replace(final String str, final String target, final String replacement) {
         final int targetLength = target.length();
 
@@ -125,10 +118,6 @@ public class Strings {
         buffer.append(str, cursor, str.length());
 
         return buffer.toString();
-    }
-
-    public static String firstUppercase(final String s) {
-        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
     public static Strings.WrappedString wrap(final String s) {

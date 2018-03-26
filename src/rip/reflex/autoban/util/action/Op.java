@@ -18,16 +18,31 @@ package rip.reflex.autoban.util.action;
 
 public class Op {
 
+    /**
+     * Player ban animation of the given type at the given player.
+     */
     public static final String PLAY_BAN_ANIMATION = "play_ban_animation";
 
+    /**
+     * Run the specified command. The command is a string made of all arguments joined together.
+     */
     public static final String RUN_COMMAND        = "run_command";
 
+    /**
+     * Wait, sleep, do nothing, pass for the specified number of seconds.
+     */
     public static final String WAIT               = "wait";
 
+    /**
+     * Force all the commands to be ran in the primary thread.
+     * MUST BE FIRST IN THE ACTIONS LIST!
+     */
     public static final String ALL_SYNC           = "all_sync";
 
+    /**
+     * Force all the commands to be ran off the primary thread.
+     * MUST BE FIRST IN THE ACTIONS LIST!
+     */
     public static final String ALL_ASYNC          = "all_async";
-
-    public static final String BROADCAST          = "broadcast";
 
 }

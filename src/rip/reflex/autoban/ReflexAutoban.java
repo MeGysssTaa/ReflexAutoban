@@ -22,6 +22,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import rip.reflex.api.ReflexAPI;
 import rip.reflex.autoban.api.ReflexAutobanAPIProvider;
+import rip.reflex.autoban.bananimation.BanAnimations;
 import rip.reflex.autoban.banwave.BanWave;
 import rip.reflex.autoban.command.base.ReflexCommand;
 import rip.reflex.autoban.command.impl.CommandRab;
@@ -78,6 +79,7 @@ public class ReflexAutoban extends JavaPlugin {
             new EventListener(this);
 
             // Misc
+            BanAnimations.init();
             Functions.init();
             Actions.init();
         } catch (final Exception ex) {
