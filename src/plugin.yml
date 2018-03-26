@@ -1,0 +1,16 @@
+name: ReflexAutoban
+main: rip.impl.autoban.ReflexAutoban
+description: An official Reflex add-on for better autobaning
+depend: [Reflex]
+author: DarksideCode
+version: 2.0.0
+commands:
+  rab:
+    description: ReflexAutoban commands
+permissions:
+  rab.command.help:
+    default: op
+  rab.command.reload:
+    default: op
+  rab.command.banwave:
+    default: op
