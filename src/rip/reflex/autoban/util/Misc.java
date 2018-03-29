@@ -53,7 +53,7 @@ public class Misc {
      * @param name The name to search a player by.
      * @return Online Player whose name match
      */
-    public static Player byName(final String name) {
+    public static Player findPlayer(final String name) {
         return Bukkit.getOnlinePlayers().stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 

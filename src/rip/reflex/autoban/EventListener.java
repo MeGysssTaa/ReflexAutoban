@@ -75,6 +75,8 @@ public class EventListener implements Listener {
      */
     @EventHandler
     public void cheaterDetected(final ReflexCommandEvent e) {
+        e.setCancelled(true); // Don't let Reflex do what it wants
+
         // Make sure that the command is somehow related to kicking and the Reflex API is ready
         if ((!(instance.isReflexReady())) || (!(e.getCommand().contains("kick"))))
             return;
@@ -86,18 +88,21 @@ public class EventListener implements Listener {
         final int curPKc = stats.addPK();
         final int prePKc = stats.getPrePkc();
 
+        instance.reflex().reset(p);
+
         // Loop through all the actions to find ones matching the 'P < C >= G' condition,
         // where 'P' is player's previous PKC, 'C' - current, and 'G' is the amount of PKs
         // stated at the given entry in config, and add them in this 'actions' list.
         final List<String> actions = new ArrayList<>();
-        final String id = Strings.randomComp(8, BAN_ID_CHARSET);
+        final String id = "#" + Strings.randomComp(8, BAN_ID_CHARSET);
 
-        instance.getConfig().getStringList("actions").stream().filter(vl -> {
+        instance.getConfig().getConfigurationSection("actions").getKeys(false).stream().filter(vl -> {
+            if (vl.equals("ban_wave"))
+                return false;
+
             final int pki = Integer.parseInt(vl);
             return prePKc < pki && curPKc >= pki;
-        }).forEach(s -> {
-            for (String a : instance.getConfig().getStringList("actions." + s)) actions.add(a);
-        });
+        }).forEach(s -> actions.addAll(instance.getConfig().getStringList("actions." + s)));
 
         // Execute the actions
         Misc.execute(actions, p,

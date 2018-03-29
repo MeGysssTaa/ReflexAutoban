@@ -130,7 +130,7 @@ public class BanWave {
         // Execute actions.ban_wave at all players in the ban wave
         for (final String name : players) {
             // Find this skid whereever he is hiding
-            Player p = Misc.byName(name);
+            Player p = Misc.findPlayer(name);
 
             if (p == null) // Someone is too good in HAS...
                 p = new MissingPlayer(name);

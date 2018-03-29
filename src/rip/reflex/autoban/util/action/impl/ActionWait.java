@@ -16,6 +16,7 @@
 
 package rip.reflex.autoban.util.action.impl;
 
+import org.bukkit.Bukkit;
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.util.Misc;
 import rip.reflex.autoban.util.action.AbstractAction;

@@ -18,7 +18,7 @@ package rip.reflex.autoban.bananimation;
 
 import org.bukkit.entity.Player;
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.bananimation.impl.AnimThorHammer;
+import rip.reflex.autoban.bananimation.impl.AnimLightEvaporation;
 import rip.reflex.autoban.util.Misc;
 
 import java.util.HashSet;
@@ -38,7 +38,7 @@ public class BanAnimations {
      * Initialize the ban animations
      */
     public static void init() {
-        register(new AnimThorHammer());
+        register(new AnimLightEvaporation());
     }
 
     /**

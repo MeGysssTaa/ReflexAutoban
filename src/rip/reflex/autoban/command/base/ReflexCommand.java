@@ -18,7 +18,6 @@ package rip.reflex.autoban.command.base;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +25,7 @@ import org.bukkit.entity.Player;
 import org.spigotmc.SpigotConfig;
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.multithreading.TaskManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public abstract class ReflexCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender cs, Command command, String s, String[] args) {
-        Bukkit.getScheduler().runTaskAsynchronously(ReflexAutoban.getInstance(), () -> {
+        TaskManager.runAsync(() -> {
             if ((cs instanceof Player) && (!(cs.isOp())) && (hide)) {
                 boolean any = false;
 
@@ -80,7 +80,7 @@ public abstract class ReflexCommand implements CommandExecutor {
             } catch (final Exception ex) {
                 cs.sendMessage(Strings.color("Error executing command. See console for details"));
 
-                System.out.println("Error executing command '" + Strings.join(0, args, " ") + "'");
+                ReflexAutoban.getInstance().getLog().warn("Error executing command '" + Strings.join(0, args, " ") + "'");
                 ex.printStackTrace();
             }
         });

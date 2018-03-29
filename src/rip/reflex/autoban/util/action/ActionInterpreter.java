@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.multithreading.TaskManager;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class ActionInterpreter {
         if (fOp.equals(ALL_SYNC))
             Bukkit.getScheduler().runTask(ReflexAutoban.getInstance(), this::run0);
         else if (fOp.equals(ALL_ASYNC))
-            Bukkit.getScheduler().runTaskAsynchronously(ReflexAutoban.getInstance(), this::run0);
+            TaskManager.runAsync(this::run0);
         else run0();
     }
 
@@ -71,7 +72,7 @@ public class ActionInterpreter {
                         Bukkit.getScheduler().runTask(ReflexAutoban.getInstance(), () -> runAction(a));
                     else if (a.hasFlow(Flow.ASYNC))
                         // Force asynchronous execution
-                        Bukkit.getScheduler().runTaskAsynchronously(ReflexAutoban.getInstance(), () -> runAction(a));
+                        TaskManager.runAsync(() -> runAction(a));
                     else runAction(a);
                 } catch (final Exception ex) {
                     ReflexAutoban.getInstance().getLog().warn(String.format("Failed to interpret action '%s' (current state: %s)", a.getStatement(), a.getCurrentState()));

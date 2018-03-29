@@ -23,12 +23,26 @@ import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.banwave.MissingPlayer;
 import rip.reflex.autoban.util.Misc;
 
+/**
+ * The object to extend when creating BanAnimation implementations.
+ */
 @RequiredArgsConstructor
 public abstract class BanAnimation {
 
+    /**
+     * Type (identification number) of this ban animation.
+     */
     @Getter
     private final int id;
 
+    /**
+     * Play this ban animation at the given player.
+     * If the given player is null or an instance of
+     * MissingPlayer, simply success is returned.
+     *
+     * @param p The player to play the animation at.
+     * @return true if animation was played successfully, false in case of error.
+     */
     public final boolean play(final Player p) {
         if ((p == null) || (p instanceof MissingPlayer))
             return true;

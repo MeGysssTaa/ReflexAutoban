@@ -41,8 +41,8 @@ public class CommandRab extends ReflexCommand {
 
         addSubCommand(new CommandRabBanwave());
 
-        addSimpleSubCommand("help", rab.getReflexMsg("cmdDescReflexHelp"), "rab.command.help", getNoperm(), this::helpMessage);
-        addSimpleSubCommand("reload", rab.getReflexMsg("cmdDescReflexReload"), "rab.command.reload", getNoperm(), this::reloadCommand);
+        addSimpleSubCommand("help", rab.getReflexRaw("cmdDescReflexHelp"), "rab.command.help", getNoperm(), this::helpMessage);
+        addSimpleSubCommand("reload", rab.getReflexRaw("cmdDescReflexReload"), "rab.command.reload", getNoperm(), this::reloadCommand);
     }
 
     /**
@@ -74,7 +74,7 @@ public class CommandRab extends ReflexCommand {
      */
     private void helpMessage(CommandSender cs, CommandArguments args) {
         cs.sendMessage(rab.getReflexMsg("reflexHelpTitle"));
-        cs.sendMessage("  §9rab§7 - &r" + rab.getReflexMsg("cmdDescReflex"));
+        cs.sendMessage("  §9rab§7 - §r" + rab.getReflexRaw("cmdDescReflex"));
 
         for (final ReflexSubCommand sub : subCommands)
             if (cs.hasPermission(sub.getPermission()))

@@ -24,19 +24,15 @@ import rip.reflex.autoban.command.base.CommandConditions;
 import rip.reflex.autoban.command.base.ReflexSubCommand;
 import rip.reflex.autoban.util.Strings;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Current ban wave monitoring and management tools.
  */
 public class CommandRabBanwave extends ReflexSubCommand {
 
-    private static final DateFormat tf = new SimpleDateFormat("mm:ss");
-
     public CommandRabBanwave() {
-        super("banwave", "rab.command.banwave", rab.getLang("cmd_descriptions.banwave"));
+        super("banwave", rab.getLang("commands.ban_wave.description"), "rab.command.banwave");
     }
 
     @Override
@@ -62,11 +58,14 @@ public class CommandRabBanwave extends ReflexSubCommand {
                 for (final String player : bw.getPlayers())
                     players.append(player).append(", ");
 
-                // ...
-                cs.sendMessage(Strings.format(rab.getLang("commands.ban_wave.info"), "%time%",
-                    Strings.replace(tf.format(new Date(System.currentTimeMillis())), ":", " min ") + " s",
-                    "%players_number%", Integer.toString(bw.size()), "%players_list%", players.substring(0, players.length() - 2)));
+                // Milliseconds to next regular schedule
+                long millis = bw.getNextSchedule() - System.currentTimeMillis();
+                long msToMin = TimeUnit.MILLISECONDS.toMinutes(millis);
 
+                String pstr = (players.length() == 0) ? "..." : players.substring(0, players.length() - 2);
+                cs.sendMessage(Strings.format(rab.getLang("commands.ban_wave.info"), "%time%", String.format("%d min, %d s",
+                    msToMin, TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(msToMin)),
+                    "%players_number%", Integer.toString(bw.size()), "%players_list%", pstr));
                 break;
 
             case "clear":

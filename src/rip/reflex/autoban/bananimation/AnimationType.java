@@ -21,6 +21,11 @@ package rip.reflex.autoban.bananimation;
  */
 public class AnimationType {
 
-    public static final int THOR_HAMMER = 0;
+    /**
+     * Blow a massive hurricane of light white particles around
+     * player, increasing their count for 2 seconds of run, until
+     * full player evaporation (ban/kick/other type of removal).
+     */
+    public static final int LIGHT_EVAPORATION = 0;
 
 }

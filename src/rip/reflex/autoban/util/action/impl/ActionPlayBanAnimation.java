@@ -16,6 +16,9 @@
 
 package rip.reflex.autoban.util.action.impl;
 
+import rip.reflex.autoban.ReflexAutoban;
+import rip.reflex.autoban.bananimation.BanAnimations;
+import rip.reflex.autoban.util.Misc;
 import rip.reflex.autoban.util.action.AbstractAction;
 import rip.reflex.autoban.util.action.Op;
 
@@ -29,9 +32,20 @@ public class ActionPlayBanAnimation extends AbstractAction {
     }
 
     @Override
-    protected boolean run0(String[] args) throws Exception {
+    protected boolean run0(final String[] args) throws Exception {
+        final String typeStr = args[0];
+        final int type;
 
-        return true;
+        try {
+            type = Integer.parseInt(typeStr);
+        } catch (final NumberFormatException ex) {
+            ReflexAutoban.getInstance().getLog().warn("Action PLAY_BAN_ANIMATION expected INTEGER at 0, but got '" + typeStr + "'");
+            Misc.printStackTrace(ex);
+
+            return false;
+        }
+
+        return BanAnimations.run(type, Misc.findPlayer(args[1]));
     }
 
 }

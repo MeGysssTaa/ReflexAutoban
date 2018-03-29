@@ -32,12 +32,23 @@ import rip.reflex.autoban.util.UnsupportedAPIException;
 import rip.reflex.autoban.util.action.Actions;
 import rip.reflex.autoban.util.action.func.Functions;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ReflexAutoban extends JavaPlugin {
 
     /**
      * The Reflex API version we can work with
      */
     public static final int API_VERSION = 3;
+
+    /**
+     * The maximal amount of threads our asynchronous executor is allowed to produce.
+     * Note that the fact it is the MAXIMAL thread count doesn't mean it's the USUAL
+     * thread count. The limit only exist in order to prevent infinite thread
+     * reduplication in case of some critical performance issue.
+     */
+    private static final int MAX_THREAD_COUNT = 12;
 
     /**
      * Public access for non-static methods of this class
@@ -66,6 +77,12 @@ public class ReflexAutoban extends JavaPlugin {
     private BanWave currentBanWave = new BanWave();
 
     /**
+     * Used for Bukkit-away asynchronous code execution.
+     */
+    @Getter
+    private ExecutorService executor;
+
+    /**
      * Initialize basic stuff
      */
     @Override
@@ -74,6 +91,11 @@ public class ReflexAutoban extends JavaPlugin {
             // Init logger and assign instance
             log = new RABLogger(instance = this);
             log.info("Starting ReflexAutoban v" + getDescription().getVersion() + " (API: " + API_VERSION + ")");
+
+            executor = Executors.newFixedThreadPool(MAX_THREAD_COUNT);
+
+            // Create a copy of the default configuration if one doesn't exist
+            saveDefaultConfig();
 
             // Register events
             new EventListener(this);
@@ -92,7 +114,7 @@ public class ReflexAutoban extends JavaPlugin {
             throw new RuntimeException("Fatal error during ReflexAutoban startup", ex);
         }
 
-        log.info("Startup done");
+        log.info("Almost done!");
     }
 
     /**
@@ -103,11 +125,15 @@ public class ReflexAutoban extends JavaPlugin {
         ReflexCommand.register(new CommandRab());
 
         // Start asynchronous ban wave schedule
-        int bwPeriod = getSetting("ban_wave_period", 15) /* minutes */ * 60 /* seconds */ / 20 /* ticks */;
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> currentBanWave.run(true), bwPeriod, bwPeriod);
+        int bwPeriod = getSetting("ban_wave_period", 15) /* minutes */ * 60 /* seconds */ * 20 /* ticks */;
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> currentBanWave.run(true), 1, bwPeriod);
 
         // Initialize ReflexAutoban API
         ReflexAutobanAPIProvider.init();
+        log.info("ReflexAutoban has fully started");
+
+        if (getSetting("dev_mode", false))
+            log.info("Developer mode is on! Be aware of many random non-sense debug messages and errors!");
     }
 
     /**
@@ -162,7 +188,7 @@ public class ReflexAutoban extends JavaPlugin {
 
     /**
      * Obtain a translation from the selected Reflex theme at
-     * the given key, add ReflexAutoban's prefix to it and format.
+     * the given key, adding ReflexAutoban's prefix to it and format.
      *
      * @param key The key to look for translations at.
      * @return the translated string from the selected Reflex theme,
@@ -170,6 +196,17 @@ public class ReflexAutoban extends JavaPlugin {
      */
     public String getReflexMsg(final String key) {
         return (isReflexReady()) ? Strings.replace(reflex().translateAndFormat(getPrefix(), key), "Reflex", "ReflexAutoban") : key;
+    }
+
+    /**
+     * Obtain a translation from the selected Reflex theme at
+     * the given key, with no any kind of formatting applied.
+     *
+     * @param key The key to look for translations at.
+     * @return the translated string from the selected Reflex theme.
+     */
+    public String getReflexRaw(final String key) {
+        return (isReflexReady()) ? Strings.replace(reflex().translateThemeString(key), "Reflex", "ReflexAutoban") : key;
     }
 
     /**
