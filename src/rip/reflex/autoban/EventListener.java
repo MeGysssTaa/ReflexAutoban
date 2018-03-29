@@ -26,18 +26,12 @@ import rip.reflex.api.event.ReflexCommandEvent;
 import rip.reflex.api.event.ReflexLoadEvent;
 import rip.reflex.autoban.util.Misc;
 import rip.reflex.autoban.util.Stats;
-import rip.reflex.autoban.util.Strings;
 import rip.reflex.autoban.util.UnsupportedAPIException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventListener implements Listener {
-
-    /**
-     * Characters ban IDs consist of
-     */
-    private static final String BAN_ID_CHARSET = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890";
 
     /**
      * For easier access (instead of ReflexAutoban#getInstance)
@@ -94,7 +88,6 @@ public class EventListener implements Listener {
         // where 'P' is player's previous PKC, 'C' - current, and 'G' is the amount of PKs
         // stated at the given entry in config, and add them in this 'actions' list.
         final List<String> actions = new ArrayList<>();
-        final String id = "#" + Strings.randomComp(8, BAN_ID_CHARSET);
 
         instance.getConfig().getConfigurationSection("actions").getKeys(false).stream().filter(vl -> {
             if (vl.equals("ban_wave"))
@@ -108,7 +101,7 @@ public class EventListener implements Listener {
         Misc.execute(actions, p,
                 "%pkc%", Integer.toString(curPKc),
                 "%prev_pkc%", Integer.toString(prePKc),
-                "%id%", id
+                "%id%", e.getViolationId()
         );
     }
 

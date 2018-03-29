@@ -56,14 +56,6 @@ public class Strings {
         return source[random.nextInt(source.length)];
     }
 
-    public static String randomComp(final int length, final String source) {
-        final String[] s = new String[source.length()];
-
-        for (int i = 0; i < source.length(); i++)
-            s[i] = String.valueOf(source.charAt(i));
-        return random(length, s);
-    }
-
     public static String random(final int length, final String... source) {
         final StringBuilder s = new StringBuilder();
 
