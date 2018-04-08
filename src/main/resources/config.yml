@@ -1,0 +1,123 @@
+#### ReflexAutoban Configuration ######################################
+#
+#   Welcome here! Looks like you want to change something, am
+# I right? Before doing so, please note one thing: all the
+# settings were tested a lot to work properly. If ReflexAutoban breaks
+# after you touched anything, it's YOUR fault.
+#
+#   For any configuration assistance please private message
+# DarksideCode on Spigot, open an issue at g.impl.rip/abbug
+# or write us in Discord: g.impl.rip/discord
+#
+#   PLEASE REFRAIN FROM TOUCHING ANYTHING WITHOUT SERIOUS REASONS TO!
+#
+#   With love, Reflex team.
+#   © reflex.rip, 2016-2018.
+#
+########################################################################
+
+# Where should the data files be saved? Data files contain info
+# about players banned, logs, etc. (see overview).
+#
+# %default_data_folder% will be replaced with '/{your_server_folder}/plugins/ReflexAutoban/'
+#
+# If you have a BungeeCord network on a single VPS, and don't
+# want to use MySQL, make sure to specify the same working
+# directory for all the servers!
+working_directory: '%default_data_folder%'
+
+# If enabled, ReflexAutoban will write its logs in special files saved in
+# {working_directory}/logs and named in format DD-MM-YYYY.log.
+# ReflexAutoban makes one log per day. This means one log will contain
+# everything happened in a day. 24 hours later, there will be
+# a new file created with a new date containing the events of a new day
+make_logs: true
+
+# Enable developer mode? This will let ReflexAutoban log
+# debug messages and print full stack traces and errors
+dev_mode: false
+
+# Messages customization
+lang:
+
+  # ReflexAutoban prefix to display in its messages
+  prefix: "&9&l「&r&bRAB&9&l」&r"
+
+  # The message that is displayed at the end of ban waves
+  ban_wave_end: "  &c&lREFLEX CHEAT DETECTION&r%break%
+      &b%players_banned%&r cheaters have been banned for interrupting fair%break%
+      players' gameplay in this ban wave. Let justice prevail!"
+
+  # Messages related to Reflex Autoban subcommands
+  commands:
+
+    # Messages related to the '/rab banwave' command
+    ban_wave:
+
+      # The description of the '/rab banwave' command displayed in '/rab help'
+      description: 'Ban wave monitoring and management'
+
+      # Sent to the sender of the '/reflex banwave run' command
+      run: 'Forcing the ban wave to run as fast as it can!'
+
+      # Sent to the sender of the '/reflex banwave info' command.
+      # Gives sender the neccessary info related to the current ban wave
+      info: 'Next regular schedule: &9in %time%%break%
+      &rPlayers (&9%players_number%&r): &7%players_list%'
+
+      # Sent to the sender of the '/reflex banwave addplayer' command
+      addplayer: 'Added player &9%player%&r to the ban wave'
+
+      # Sent to the sender of the '/reflex banwave removeplayer' command
+      removeplayer: 'Removed player &9%player%&r from the ban wave'
+
+      # Sent to the sender of the '/reflex banwave clear' command
+      clear: 'Cleared the ban wave'
+
+# Should ReflexAutoban hide its commands from using and tab-completing
+# from players who haven't got permissions for any of those?
+# Toggle this on if you don't want your players to know which anticheat is on
+hide: false
+
+# How often should the ban wave run (in minutes)?
+# Please note that the purpose of any anticheat is to prevent
+# cheaters from ruining gameplay of legitimate players. This
+# means that detected hackers should be removed from the server
+# as quickly as possible. Using high periods is very undesirable
+# at least because then it will allow hackers to interrupt many
+# games before they get banned, and then switch alt just within seconds.
+# (!) The concept of ban wave itself is NOT recommended if you want
+# your server to be simply clean without unnecessary show-offs
+ban_wave_period: 15
+
+# Actions that are taken at players who reach specific numbers of PKs (Potential Kicks - see overview for details).
+# See the overview page for details
+actions:
+
+  # Executed at all players who were in the ban wave
+  # list at the moment when the ban wave ran.
+  # WARNING: ALL ACTIONS HERE ARE RAN ASYNC BY DEFAULT!!!
+  #          IF SYNCHRONOUS RUN IS DESIRED, PLEASE ADD A
+  #          '@sync' ARGUMENT IN ALL ACTIONS STRINGS BELOW
+  #          OR INSERT AN 'ALL_SYNC' ACTION AT THE TOP!
+  ban_wave:
+  - "SAVE_LOGS %player%"
+  - "RUN_COMMAND reflex ban %player% 7d
+  &c&lYour account is suspended.&r%break%%break%
+  The &b&lREFLEX ANTICHEATING SYSTEM&r has classified you as a possible cheater &7(%id%)&r.%break%
+  Please contact us if you believe that this ban is unfair.%break%%break%&7
+  %date%"
+
+  # Executed when a player scores 3 or more PKs. See overview
+  # if you want to add players with N+ PKs to the ban wave.
+  3:
+  - "ALL_ASYNC"
+  - "IGNORE_NEXT %player%"
+  - "SAVE_LOGS %player%"
+  - "WAIT $rnd(5,10)"
+  - "PLAY_BAN_ANIMATION 0 %player%"
+  - "RUN_COMMAND reflex ban %player% 7d
+  &c&lYour account is suspended.&r%break%%break%
+  The &b&lREFLEX ANTICHEATING SYSTEM&r has classified you as a possible cheater &7(%id%)&r.%break%
+  Please contact us if you believe that this ban is unfair.%break%%break%&7
+  %date%"
