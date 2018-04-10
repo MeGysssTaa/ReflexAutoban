@@ -180,7 +180,7 @@ public class ReflexAutoban extends JavaPlugin {
     }
 
     public File getCurrentBansFile() {
-        return getRabFile("bans/" + Now.date() + ".txt");
+        return getRabFile("bans/" + Now.date() + ".log");
     }
 
     /**

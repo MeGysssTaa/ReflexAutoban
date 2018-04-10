@@ -63,7 +63,7 @@ public class ActionSaveLogs extends AbstractAction {
             logs.append(logs4c.toString()).append('\n');
         });
 
-        Files.write(ReflexAutoban.getInstance().getRabFile("bans/"), logs.append('\n').toString());
+        Files.write(ReflexAutoban.getInstance().getCurrentBansFile(), logs.append('\n').toString());
 
         return true;
     }
