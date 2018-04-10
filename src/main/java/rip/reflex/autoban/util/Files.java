@@ -59,6 +59,14 @@ public class Files {
         return f;
     }
 
+    /**
+     * Write the given text to the specified file.
+     * If file already exists, it will not be overwritten,
+     * but will be appended with the given text.
+     *
+     * @param f The file to write to/append.
+     * @param text The text to write/append with.
+     */
     public static void write(final File f, final String text) {
         try (final FileWriter fw = new FileWriter(f, true)) {
             fw.write(text + '\n');

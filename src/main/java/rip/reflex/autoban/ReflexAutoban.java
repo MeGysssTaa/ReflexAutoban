@@ -26,10 +26,7 @@ import rip.reflex.autoban.bananimation.BanAnimations;
 import rip.reflex.autoban.banwave.BanWave;
 import rip.reflex.autoban.command.base.ReflexCommand;
 import rip.reflex.autoban.command.impl.CommandRab;
-import rip.reflex.autoban.util.Files;
-import rip.reflex.autoban.util.RABLogger;
-import rip.reflex.autoban.util.Strings;
-import rip.reflex.autoban.util.UnsupportedAPIException;
+import rip.reflex.autoban.util.*;
 import rip.reflex.autoban.util.action.Actions;
 import rip.reflex.autoban.util.action.func.Functions;
 
@@ -180,6 +177,10 @@ public class ReflexAutoban extends JavaPlugin {
     public File getRabFile(final String s) {
         final String wd = workingDir;
         return Files.getFile((wd.endsWith("/") ? wd : wd + "/") + s);
+    }
+
+    public File getCurrentBansFile() {
+        return getRabFile("bans/" + Now.date() + ".txt");
     }
 
     /**

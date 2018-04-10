@@ -29,8 +29,8 @@ public class Now {
     private static final DateFormat tf = new SimpleDateFormat("HH:mm:ss");
 
     /**
-     * Obtain current date
-     * @return the current date string in dd.MM.YYYY format
+     * Obtain current date.
+     * @return the current date string in dd.MM.YYYY format.
      */
     public static String date() {
         return df.format(new Date(System.currentTimeMillis()));
