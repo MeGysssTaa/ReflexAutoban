@@ -16,8 +16,6 @@
 
 package rip.reflex.autoban.util;
 
-import rip.reflex.util.misc.Strings;
-
 import java.io.File;
 import java.io.FileWriter;
 

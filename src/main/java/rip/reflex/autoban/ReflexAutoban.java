@@ -179,6 +179,10 @@ public class ReflexAutoban extends JavaPlugin {
         return Files.getFile((wd.endsWith("/") ? wd : wd + "/") + s);
     }
 
+    /**
+     * Retreive the ban logs file for current date.
+     * @return the ban logs file as per getRabFile("bans/" + {current_date_DD.MM.YYYY} + ".log")
+     */
     public File getCurrentBansFile() {
         return getRabFile("bans/" + Now.date() + ".log");
     }
