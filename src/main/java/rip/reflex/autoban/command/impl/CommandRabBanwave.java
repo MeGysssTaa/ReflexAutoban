@@ -37,6 +37,8 @@ public class CommandRabBanwave extends ReflexSubCommand {
 
     @Override
     protected void check(CommandConditions cc) {
+        cc.usage(Strings.replace(rab.getReflexMsg("usage"), "%usage%",
+                "banwave <run|info|clear|addplayer|removeplayer> [player]"));
         cc.checkArgument(rab.getReflexMsg("cmdInvalidOperation"), 0, ArgumentType.STRING);
         cc.checkOptionalArg(rab.getReflexMsg("cmdInvalidPlayer"), 1, ArgumentType.STRING);
     }
@@ -77,6 +79,11 @@ public class CommandRabBanwave extends ReflexSubCommand {
             case "addplayer": {
                 String target = args.get(1);
 
+                if ((target == null) || (target.length() < 2)) {
+                    cs.sendMessage(rab.getReflexMsg("cmdInvalidPlayer"));
+                    break;
+                }
+
                 cs.sendMessage(Strings.format(rab.getLang("commands.ban_wave.addplayer"), "%player%", target));
                 bw.addPlayer(args.get(1));
 
@@ -86,11 +93,20 @@ public class CommandRabBanwave extends ReflexSubCommand {
             case "removeplayer": {
                 String target = args.get(1);
 
+                if ((target == null) || (target.length() < 2)) {
+                    cs.sendMessage(rab.getReflexMsg("cmdInvalidPlayer"));
+                    break;
+                }
+
                 cs.sendMessage(Strings.format(rab.getLang("commands.ban_wave.removeplayer"), "%player%", target));
                 bw.removePlayer(args.get(1));
 
                 break;
             }
+
+            default:
+                cs.sendMessage(rab.getReflexMsg("cmdInvalidOperation"));
+                break;
         }
     }
 

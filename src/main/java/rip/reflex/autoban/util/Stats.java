@@ -61,9 +61,9 @@ public class Stats {
      * Add player one more potential kick.
      * @return the new amount of potential kicks.
      */
-    public int addPK() {
+    public int addPK(final int number) {
         prePkc = pkc;
-        return pkc += 1;
+        return pkc += number;
     }
 
     /**
@@ -90,6 +90,7 @@ public class Stats {
 
         log.getTags().forEach(tag -> str.append(" | ").append(tag));
 
+        str.append(" | ");
         str.append("tps: ").append(r.getTps()).append(" | ");
         str.append("ping: ").append(r.getPing(player)).append(" | ");
         str.append("lp: ").append(r.getLagPoints(player)).
@@ -122,7 +123,7 @@ public class Stats {
      */
     public boolean hasLogs(final Cheat c) {
         final List<String> logs4c = logs.get(c);
-        return logs4c == null || logs4c.isEmpty();
+        return logs4c != null && !logs4c.isEmpty();
     }
 
     /**

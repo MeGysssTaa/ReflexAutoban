@@ -43,6 +43,8 @@ public class CommandRab extends ReflexCommand {
 
         addSimpleSubCommand("help", rab.getReflexRaw("cmdDescReflexHelp"), "rab.command.help", getNoperm(), this::helpMessage);
         addSimpleSubCommand("reload", rab.getReflexRaw("cmdDescReflexReload"), "rab.command.reload", getNoperm(), this::reloadCommand);
+
+        setSubcmderr(Strings.replace(rab.getReflexMsg("cmdUnknownSubcmd"), "/reflex", "/rab"));
     }
 
     /**

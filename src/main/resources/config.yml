@@ -44,9 +44,9 @@ lang:
   prefix: "&9&l「&r&bRAB&9&l」&r"
 
   # The message that is displayed at the end of ban waves
-  ban_wave_end: "  &c&lREFLEX CHEAT DETECTION&r%break%
-      &b%players_banned%&r cheaters have been banned for interrupting fair%break%
-      players' gameplay in this ban wave. Let justice prevail!"
+  ban_wave_end: "  &c&l&nREFLEX CHEAT DETECTION&r%break%
+        &b%players_banned%&r cheaters have been banned for interrupting fair%break%
+        players' gameplay in this ban wave. Let the justice prevail!"
 
   # Messages related to Reflex Autoban subcommands
   commands:
@@ -90,6 +90,30 @@ hide: false
 # your server to be simply clean without unnecessary show-offs
 ban_wave_period: 15
 
+# Map of Reflex check names to their PK weights. The numbers are
+# basically how many potential kicks will ReflexAutoban score to
+# a player each time they get 'kicked' by Reflex according to the
+# weight assigned to that check
+weights:
+
+    # How many PKs will a player score in case of a Reflex kick for KillAura?
+    killaura: 1
+
+    # How many PKs will a player score in case of a Reflex kick for Criticals?
+    criticals: 3
+
+    # How many PKs will a player score in case of a Reflex kick for AntiKnockback?
+    antiknockback: 2
+
+    # How many PKs will a player score in case of a Reflex kick for BlockActions?
+    blockactions: 2
+
+    # How many PKs will a player score in case of a Reflex kick for BadPackets?
+    badpackets: 1
+
+    # How many PKs will a player score in case of a Reflex kick for InvActions?
+    invactions: 1
+
 # Actions that are taken at players who reach specific numbers of PKs (Potential Kicks - see overview for details).
 # See the overview page for details
 actions:
@@ -101,7 +125,7 @@ actions:
   #          '@sync' ARGUMENT IN ALL ACTIONS STRINGS BELOW
   #          OR INSERT AN 'ALL_SYNC' ACTION AT THE TOP!
   ban_wave:
-  - "SAVE_LOGS %player%"
+  - "SAVE_LOGS %player% %id%"
   - "RUN_COMMAND reflex ban %player% 7d
   &c&lYour account is suspended.&r%break%%break%
   The &b&lREFLEX ANTICHEATING SYSTEM&r has classified you as a possible cheater &7(%id%)&r.%break%

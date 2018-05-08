@@ -109,8 +109,10 @@ public class EventListener implements Listener {
         if (stats.isIgnoring())
             return;
 
+        final int weight = Math.max(0, inst.getSetting("weights." + e.getCheat().name().toLowerCase(), 0));
+
         // Register this PK
-        final int curPKc = stats.addPK();
+        final int curPKc = stats.addPK(weight);
         final int prePKc = stats.getPrePkc();
 
         inst.reflex().reset(p);

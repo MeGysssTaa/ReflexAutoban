@@ -52,8 +52,11 @@ public class Files {
      *         (ensuring its parent folders exist).
      */
     public static File getFile(final String path) {
-        final File f = new File(path);
-            ensureExists(f);
+        File f = new File(path);
+        ensureExists(f);
+
+        if ((Strings.replace(path, "\\", "/").endsWith("/")) && (!(f.exists()))) // is a directory
+            f.mkdirs();
         return f;
     }
 
@@ -72,7 +75,7 @@ public class Files {
             fw.flush();
             fw.close();
         } catch (final Exception ex) {
-            throw new RuntimeException(String.format("Failed to run %s to '%s'",
+            throw new RuntimeException(String.format("Failed to write %s to '%s'",
                     (text.length() > 50) ? text.length() + " chars" : "'" + text + "'", f.getAbsolutePath()), ex);
         }
     }

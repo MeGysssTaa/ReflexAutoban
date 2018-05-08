@@ -86,7 +86,7 @@ public class AnimLightEvaporation extends BanAnimation {
                     final double dz = r * Math.sin(2.5 * d);
 
                     // The longer the animation is played - the more particles we generate
-                    final int particles = (int) Math.floor(5.0D + ((DURATION_TICKS - duration) / 1.5D));
+                    final int particles = (int) Math.floor(4.0D + ((DURATION_TICKS - duration) / 1.8D));
 
                     for (int i = 0; i < particles; i++)
                         keepAt.getWorld().playEffect(new Location(keepAt.getWorld(),

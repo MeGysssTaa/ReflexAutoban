@@ -54,12 +54,12 @@ public class ActionSaveLogs extends AbstractAction {
         final ReflexAPI r = ReflexAutoban.getInstance().reflex();
         final StringBuilder logs = new StringBuilder();
 
-        logs.append(id).append(" | Player: ").append(p.getName()).append(" (").
-                append(r.getMCBrand(p)).append(" ").append(VersionConverter.pv2str(r.getProtocolVersion(p))).append(")");
+        logs.append(id).append(" | Player: ").append(p.getName()).append(" (").append(
+                r.getMCBrand(p)).append(" ").append(VersionConverter.pv2str(r.getProtocolVersion(p))).append("):\n");
         Arrays.stream(Cheat.values()).filter(stats::hasLogs).forEach(c -> {
-            StringBuilder logs4c = new StringBuilder(c.name() + " logs:\n");
-            stats.getLogs(c).forEach(log -> logs4c.append("\t").append(log));
+            StringBuilder logs4c = new StringBuilder("\t" + c.name() + " logs:\n");
 
+            stats.getLogs(c).forEach(log -> logs4c.append("\t\t").append(log).append('\n'));
             logs.append(logs4c.toString()).append('\n');
         });
 

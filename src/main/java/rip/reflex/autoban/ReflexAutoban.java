@@ -174,7 +174,7 @@ public class ReflexAutoban extends JavaPlugin {
      * @return The File the absolute path of which is something like {working_dir}/s
      *         where s is the given string - the name of the file to look for.
      */
-    public File getRabFile(final String s) {
+    public File getLocal(final String s) {
         final String wd = workingDir;
         return Files.getFile((wd.endsWith("/") ? wd : wd + "/") + s);
     }
@@ -184,7 +184,7 @@ public class ReflexAutoban extends JavaPlugin {
      * @return the ban logs file as per getRabFile("bans/" + {current_date_DD.MM.YYYY} + ".log")
      */
     public File getCurrentBansFile() {
-        return getRabFile("bans/" + Now.date() + ".log");
+        return getLocal("bans/" + Now.date() + ".log");
     }
 
     /**

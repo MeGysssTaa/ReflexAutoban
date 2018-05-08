@@ -54,7 +54,7 @@ public class RABLogger {
             flogger.setFormatter(r -> "(" + r.getFlogger().getName() + "/" + r.getLevel() + ") | " + r.getMessage());
 
             if (rab.getSetting("make_logs", true)) {
-                final DailyLogFilePublisher dlogp = new DailyLogFilePublisher(rab.getRabFile("logs/")) {
+                final DailyLogFilePublisher dlogp = new DailyLogFilePublisher(rab.getLocal("logs/")) {
                     @Override
                     public void handle(FlogRecord record, FlogFormatter formatter) {
                         super.handle(record, formatter);
