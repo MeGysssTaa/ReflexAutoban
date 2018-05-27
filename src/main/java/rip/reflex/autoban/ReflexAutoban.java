@@ -43,7 +43,7 @@ public class ReflexAutoban extends JavaPlugin {
     /**
      * The Reflex API version we can work with
      */
-    public static final int API_VERSION = 3;
+    public static final int API_VERSION = 4;
 
     /**
      * The maximal amount of threads our asynchronous executor is allowed to produce.
