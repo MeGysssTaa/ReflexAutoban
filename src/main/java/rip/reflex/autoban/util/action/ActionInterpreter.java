@@ -19,7 +19,7 @@ package rip.reflex.autoban.util.action;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 import rip.reflex.autoban.util.multithreading.TaskManager;
 
 import java.util.List;

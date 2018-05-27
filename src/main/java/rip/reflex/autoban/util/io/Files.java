@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util;
+package rip.reflex.autoban.util.io;
+
+import rip.reflex.autoban.util.str.Strings;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util;
-
-import rip.reflex.autoban.ReflexAutoban;
+package rip.reflex.autoban;
 
 /**
  * Thrown in case if ReflexAutoban's API version

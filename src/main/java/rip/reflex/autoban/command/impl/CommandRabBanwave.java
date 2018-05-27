@@ -22,7 +22,7 @@ import rip.reflex.autoban.command.base.ArgumentType;
 import rip.reflex.autoban.command.base.CommandArguments;
 import rip.reflex.autoban.command.base.CommandConditions;
 import rip.reflex.autoban.command.base.ReflexSubCommand;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.str.Strings;
 
 import java.util.concurrent.TimeUnit;
 

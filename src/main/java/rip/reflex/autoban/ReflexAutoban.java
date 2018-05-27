@@ -17,7 +17,6 @@
 package rip.reflex.autoban;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import rip.reflex.api.ReflexAPI;
@@ -26,9 +25,14 @@ import rip.reflex.autoban.bananimation.BanAnimations;
 import rip.reflex.autoban.banwave.BanWave;
 import rip.reflex.autoban.command.base.ReflexCommand;
 import rip.reflex.autoban.command.impl.CommandRab;
-import rip.reflex.autoban.util.*;
+import rip.reflex.autoban.task.PKDecayTask;
 import rip.reflex.autoban.util.action.Actions;
 import rip.reflex.autoban.util.action.func.Functions;
+import rip.reflex.autoban.util.io.Files;
+import rip.reflex.autoban.util.io.RABLogger;
+import rip.reflex.autoban.util.misc.Validate;
+import rip.reflex.autoban.util.str.Strings;
+import rip.reflex.autoban.util.time.Now;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -59,7 +63,6 @@ public class ReflexAutoban extends JavaPlugin {
      * The Reflex API instance.
      * Used to access Reflex API
      */
-    @Setter
     private ReflexAPI reflex;
 
     /**
@@ -136,6 +139,10 @@ public class ReflexAutoban extends JavaPlugin {
         // Start asynchronous ban wave schedule
         int bwPeriod = getSetting("ban_wave_period", 15) /* minutes */ * 60 /* seconds */ * 20 /* ticks */;
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> currentBanWave.run(true), 1, bwPeriod);
+
+        // Start asynchronous PK decay schedule
+        int pkDecayPeriod = getSetting("pk_decay.period", 10) /* minutes */ * 60 /* seconds */ * 20 /* ticks */;
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new PKDecayTask(), 1, pkDecayPeriod);
 
         // Initialize ReflexAutoban API
         ReflexAutobanAPIProvider.init();
@@ -261,13 +268,38 @@ public class ReflexAutoban extends JavaPlugin {
      * @return the ReflexAPI instance if it's loaded and ready, null otherwise
      */
     public ReflexAPI reflex() {
-        if (reflex == null) return null;
-        if (reflex.apiVersion() != API_VERSION) {
-            Bukkit.getPluginManager().disablePlugin(this);
+//        if (reflex == null) return null;
+//        if (reflex.apiVersion() != API_VERSION) {
+//            Bukkit.getPluginManager().disablePlugin(this);
+//            throw new UnsupportedAPIException(reflex.apiVersion());
+//        }
+
+        return reflex;
+    }
+
+    /**
+     * Set the ReflexAPI instance to use.
+     *
+     * The version of the API must be equal to the API_VERSION inside
+     * the ReflexAutoban class. If the condition is not met, then an
+     * UnsupportedAPIException is thrown and, if there is no ReflexAPI
+     * instance assigned yet, the plugin will be forcefully disabled.
+     *
+     * @throws NullPointerException If the specified ReflexAPI instance is null.
+     * @throws UnsupportedAPIException If the API version of the specified ReflexAPI
+     *                                 instance is not equal to the API_VERSION value.
+     *
+     * @param reflex The new ReflexAPI instance to assign.
+     *               API version must be equal to API_VERSION.
+     */
+    public void setReflex(final ReflexAPI reflex) {
+        if (Validate.notNull(reflex, "ReflexAPI cannot be null").apiVersion() != API_VERSION) {
+            if (this.reflex == null)
+                Bukkit.getPluginManager().disablePlugin(this);
             throw new UnsupportedAPIException(reflex.apiVersion());
         }
 
-        return reflex;
+        this.reflex = reflex;
     }
 
 }

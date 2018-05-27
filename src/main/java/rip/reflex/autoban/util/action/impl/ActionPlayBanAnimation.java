@@ -18,7 +18,7 @@ package rip.reflex.autoban.util.action.impl;
 
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.bananimation.BanAnimations;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 import rip.reflex.autoban.util.action.AbstractAction;
 import rip.reflex.autoban.util.action.Op;
 

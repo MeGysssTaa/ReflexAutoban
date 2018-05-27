@@ -17,7 +17,7 @@
 package rip.reflex.autoban.util.action;
 
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 import rip.reflex.autoban.util.action.impl.*;
 
 import java.util.HashSet;

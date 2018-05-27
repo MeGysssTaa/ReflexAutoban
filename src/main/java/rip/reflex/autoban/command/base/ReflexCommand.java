@@ -24,7 +24,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.spigotmc.SpigotConfig;
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.str.Strings;
 import rip.reflex.autoban.util.multithreading.TaskManager;
 
 import java.util.ArrayList;

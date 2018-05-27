@@ -21,8 +21,8 @@ import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Misc;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.misc.Misc;
+import rip.reflex.autoban.util.str.Strings;
 import rip.reflex.autoban.util.placeholders.PlaceholderApplicator;
 
 import java.util.HashSet;

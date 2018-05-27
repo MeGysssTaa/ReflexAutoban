@@ -19,7 +19,7 @@ package rip.reflex.autoban.bananimation;
 import org.bukkit.entity.Player;
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.bananimation.impl.AnimLightEvaporation;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.str.Strings;
 
 import java.util.Arrays;
 import java.util.UUID;

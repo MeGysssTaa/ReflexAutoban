@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util;
+package rip.reflex.autoban.util.str;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

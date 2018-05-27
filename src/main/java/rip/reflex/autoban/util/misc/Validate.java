@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util;
+package rip.reflex.autoban.util.misc;
 
 /**
  * Validation utilities

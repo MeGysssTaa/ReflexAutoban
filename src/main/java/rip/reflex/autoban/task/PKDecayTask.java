@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util.action.impl;
+package rip.reflex.autoban.task;
 
 import org.bukkit.Bukkit;
-import rip.reflex.autoban.util.str.Strings;
-import rip.reflex.autoban.util.action.AbstractAction;
-import rip.reflex.autoban.util.action.Op;
+import rip.reflex.autoban.ReflexAutoban;
+import rip.reflex.autoban.util.misc.Stats;
 
-/**
- * Construct and run a Bukkit command by merging
- * all the given arguments in one string.
- */
-public class ActionRunCommand extends AbstractAction {
-
-    public ActionRunCommand() {
-        super(Op.RUN_COMMAND, 1);
-    }
+public class PKDecayTask implements Runnable {
 
     @Override
-    protected boolean run0(final String[] args) throws Exception {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Strings.join(0, args, " "));
-        return true;
+    public void run() {
+        int penalty = ReflexAutoban.getInstance().getSetting("pk_decay.penalty", 2) /* minutes */ * 60 /* seconds */ * 1000 /* milliseconds */;
+        Bukkit.getOnlinePlayers().forEach(p -> {
+            final Stats stats = Stats.of(p);
+
+            if (stats.getPkTracker().hasPassed(penalty))
+                stats.subtractPK();
+        });
     }
 
 }

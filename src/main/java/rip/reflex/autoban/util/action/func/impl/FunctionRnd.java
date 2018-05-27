@@ -17,7 +17,7 @@
 package rip.reflex.autoban.util.action.func.impl;
 
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 import rip.reflex.autoban.util.action.func.AbstractFunction;
 
 import java.util.concurrent.ThreadLocalRandom;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util;
+package rip.reflex.autoban.util.misc;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +24,7 @@ import rip.reflex.api.Cheat;
 import rip.reflex.api.CheckResult;
 import rip.reflex.api.ReflexAPI;
 import rip.reflex.autoban.ReflexAutoban;
+import rip.reflex.autoban.util.time.Timer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,12 +59,26 @@ public class Stats {
     private Map<Cheat, List<String>> logs = new ConcurrentHashMap<>();
 
     /**
-     * Add player one more potential kick.
+     * Tracks time from the last potential kick.
+     */
+    @Getter
+    private final Timer pkTracker = new Timer(0);
+
+    /**
+     * Add this player one more potential kick(s).
      * @return the new amount of potential kicks.
      */
     public int addPK(final int number) {
         prePkc = pkc;
         return pkc += number;
+    }
+
+    /**
+     * Subtract this player one potential kick if possible.
+     * Safe to use without checking - PKC will never go below 0.
+     */
+    public void subtractPK() {
+        pkc = Math.max(0, pkc-1);
     }
 
     /**

@@ -19,7 +19,7 @@ package rip.reflex.autoban.command.base;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 
 import java.util.function.Predicate;
 

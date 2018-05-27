@@ -23,7 +23,7 @@ import rip.reflex.autoban.command.base.CommandArguments;
 import rip.reflex.autoban.command.base.CommandConditions;
 import rip.reflex.autoban.command.base.ReflexCommand;
 import rip.reflex.autoban.command.base.ReflexSubCommand;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.str.Strings;
 
 /**
  * The main, base ReflexAutoban command. Used without arguments,

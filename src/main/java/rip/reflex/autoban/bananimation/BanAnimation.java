@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import rip.reflex.autoban.ReflexAutoban;
 import rip.reflex.autoban.banwave.MissingPlayer;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 
 /**
  * The object to extend when creating BanAnimation implementations.

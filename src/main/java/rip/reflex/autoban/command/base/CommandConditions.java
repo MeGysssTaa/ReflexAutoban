@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.str.Strings;
 
 import java.util.function.Predicate;
 

@@ -19,7 +19,7 @@ package rip.reflex.autoban.util.action;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Misc;
+import rip.reflex.autoban.util.misc.Misc;
 
 /**
  * The object to extend when creating Action implementations.

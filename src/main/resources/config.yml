@@ -7,7 +7,7 @@
 #
 #   For any configuration assistance please private message
 # DarksideCode on Spigot, open an issue at g.impl.rip/abbug
-# or write us in Discord: g.impl.rip/discord
+# or write us in Discord: g.reflex.rip/discord
 #
 #   PLEASE REFRAIN FROM TOUCHING ANYTHING WITHOUT SERIOUS REASONS TO!
 #
@@ -74,9 +74,7 @@ lang:
       # Sent to the sender of the '/reflex banwave clear' command
       clear: 'Cleared the ban wave'
 
-# Should ReflexAutoban hide its commands from using and tab-completing
-# from players who haven't got permissions for any of those?
-# Toggle this on if you don't want your players to know which anticheat is on
+# Hide ReflexAutoban commands from players who haven't got the appropriate permissinons?
 hide: false
 
 # How often should the ban wave run (in minutes)?
@@ -100,7 +98,7 @@ weights:
     killaura: 1
 
     # How many PKs will a player score in case of a Reflex kick for Criticals?
-    criticals: 3
+    criticals: 2
 
     # How many PKs will a player score in case of a Reflex kick for AntiKnockback?
     antiknockback: 2
@@ -113,6 +111,26 @@ weights:
 
     # How many PKs will a player score in case of a Reflex kick for InvActions?
     invactions: 1
+
+# Used when calculating the number of PKs to score after a potential kick.
+# If at the moment of new PK there have been less than {double_weight_rate}
+# seconds from the previous one, the number of PKs scored will be doubled.
+# Used to ban blatant cheaters who get kicked very often slightly faster
+double_weight_rate: 45
+
+# Global PKs reducement schedule settings
+pk_decay:
+
+  # How often (in minutes) should players' number of PKs reduce by one?
+  # For example, if set to 5, and a player gets 1 (one) PK, then that PK
+  # will be removed and the total number of PKs for that player will be
+  # set to 0 after five minutes. NOTE: no decimals (e.g. `2.5`) allowed!
+  period: 10
+
+  # If a player has got any potential kicks in the last {penalty} minutes,
+  # then they are excluded from decaying, and their number of PKs is kept
+  # as is. This is needed to avoid forgiving new/fresh potential kicks
+  penalty: 2
 
 # Actions that are taken at players who reach specific numbers of PKs (Potential Kicks - see overview for details).
 # See the overview page for details

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rip.reflex.autoban.util;
+package rip.reflex.autoban.util.io;
 
 import me.flo.flogger.Flogger4J;
 import me.flo.flogger.impl.AsyncLogWriterPublisher;
@@ -25,6 +25,7 @@ import me.flo.flogger.types.FlogLevel;
 import me.flo.flogger.types.FlogRecord;
 import org.bukkit.Bukkit;
 import rip.reflex.autoban.ReflexAutoban;
+import rip.reflex.autoban.util.str.Strings;
 
 /**
  * Used for logging.

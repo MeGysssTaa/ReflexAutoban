@@ -20,10 +20,10 @@ import org.bukkit.entity.Player;
 import rip.reflex.api.Cheat;
 import rip.reflex.api.ReflexAPI;
 import rip.reflex.autoban.ReflexAutoban;
-import rip.reflex.autoban.util.Files;
-import rip.reflex.autoban.util.Misc;
-import rip.reflex.autoban.util.Stats;
-import rip.reflex.autoban.util.VersionConverter;
+import rip.reflex.autoban.util.io.Files;
+import rip.reflex.autoban.util.misc.Misc;
+import rip.reflex.autoban.util.misc.Stats;
+import rip.reflex.autoban.util.str.VersionConverter;
 import rip.reflex.autoban.util.action.AbstractAction;
 import rip.reflex.autoban.util.action.Op;
 

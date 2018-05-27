@@ -19,8 +19,8 @@ package rip.reflex.autoban.util.placeholders;
 import org.bukkit.entity.Player;
 import rip.reflex.api.ReflexAPI;
 import rip.reflex.autoban.banwave.MissingPlayer;
-import rip.reflex.autoban.util.Now;
-import rip.reflex.autoban.util.Strings;
+import rip.reflex.autoban.util.time.Now;
+import rip.reflex.autoban.util.str.Strings;
 import rip.reflex.util.performance.LagStatus;
 
 /**
