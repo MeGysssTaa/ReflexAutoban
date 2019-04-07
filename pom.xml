@@ -106,8 +106,8 @@
         </dependency>
         <dependency>
             <groupId>rip.reflex</groupId>
-            <artifactId>reflex-re</artifactId>
-            <version>10.6-1U</version>
+            <artifactId>ReflexAPI</artifactId>
+            <version>6</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

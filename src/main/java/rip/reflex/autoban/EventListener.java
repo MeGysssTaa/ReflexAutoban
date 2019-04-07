@@ -21,12 +21,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import rip.reflex.api.Cheat;
+import rip.reflex.api.CheckResult;
 import rip.reflex.api.ReflexAPIProvider;
 import rip.reflex.api.event.ReflexCheckEvent;
 import rip.reflex.api.event.ReflexCommandEvent;
 import rip.reflex.api.event.ReflexLoadEvent;
 import rip.reflex.autoban.util.misc.Misc;
 import rip.reflex.autoban.util.misc.Stats;
+import rip.reflex.autoban.util.str.Strings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +72,25 @@ public class EventListener implements Listener {
 
         final Stats stats = Stats.of(e.getPlayer());
 
+        final CheckResult res = e.getResult();
+        final Cheat cheat = e.getCheat();
+
         if (stats.isIgnoring())
             return;
 
         // Log this violation
-        stats.log(e.getCheat(), e.getResult());
+        stats.log(cheat, res);
+
+        if (cheat == Cheat.KillAura) {
+            // Find out if this was the machine learning check detection, and,
+            // if so, set this check's cheating confidence as the last known
+            // machine learning detection confidence for this player.
+            res.getTags().forEach(tag -> {
+                if (tag.startsWith("conviction"))
+                    // Found. Get the percent part of a String like "conviction: 95.25%"
+                    stats.setLastMLConf(Double.valueOf(Strings.replace(tag.split(" ")[1], "%", "")));
+            });
+        }
     }
 
     /**
@@ -104,7 +121,9 @@ public class EventListener implements Listener {
         int weight = Math.max(0, inst.getSetting("weights." + e.getCheat().name().toLowerCase(), 0));
         int doubleRate = inst.getSetting("double_weight_rate", 45) /* seconds */ * 1000 /* milliseconds */;
 
-        if (!(stats.getPkTracker().hasPassed(doubleRate)))
+        double doubleConf = inst.getSetting("double_weight_confidence", 80);
+
+        if ((!(stats.getPkTracker().hasPassed(doubleRate))) || (stats.getLastMLConf() > doubleConf))
             weight *= 2;
 
         // Register this PK

@@ -54,6 +54,13 @@ public class Stats {
     private boolean ignoring;
 
     /**
+     * Holds the last known confidence of the Reflex's machine learning
+     * check that this player is cheating (in percents, 0-100).
+     */
+    @Getter @Setter
+    private double lastMLConf;
+
+    /**
      * Map of logs to cheats.
      */
     private Map<Cheat, List<String>> logs = new ConcurrentHashMap<>();
@@ -109,7 +116,7 @@ public class Stats {
         str.append("tps: ").append(r.getTps()).append(" | ");
         str.append("ping: ").append(r.getPing(player)).append(" | ");
         str.append("lp: ").append(r.getLagPoints(player)).
-                append(" (").append(r.getLagStatus(player).fancyName()).append(")");
+                append(" (").append(r.getLagStatus(player)).append(")");
         getLogs(cheat).add(str.toString());
 
         return this;

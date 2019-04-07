@@ -6,13 +6,27 @@
 # after you touched anything, it's YOUR fault.
 #
 #   For any configuration assistance please private message
-# DarksideCode on Spigot, open an issue at g.impl.rip/abbug
-# or write us in Discord: g.reflex.rip/discord
+# DarksideCode on Spigot, open an issue at https://g.reflex.rip/bug
+# or write us in Discord: https://g.reflex.rip/discord
 #
 #   PLEASE REFRAIN FROM TOUCHING ANYTHING WITHOUT SERIOUS REASONS TO!
 #
-#   With love, Reflex team.
-#   © reflex.rip, 2016-2018.
+#   Useful links:
+#
+#       1. Reflex on Spigot:
+#          --> https://g.reflex.rip/spigot
+#
+#       2. Reflex Discord:
+#          --> https://g.reflex.rip/discord
+#
+#       3. ReflexAutoban on Spigot:
+#          --> https://www.spigotmc.org/resources/31306/
+#
+#       4. ReflexAutoban on GitHub:
+#          --> https://github.com/MeGysssTaa/ReflexAutoban
+#
+#   With love, Reflex Development Team.
+#   © reflex.rip, 2016-2019.
 #
 ########################################################################
 
@@ -75,7 +89,7 @@ lang:
       clear: 'Cleared the ban wave'
 
 # Hide ReflexAutoban commands from players who haven't got the appropriate permissinons?
-hide: false
+hide: true
 
 # How often should the ban wave run (in minutes)?
 # Please note that the purpose of any anticheat is to prevent
@@ -94,29 +108,44 @@ ban_wave_period: 15
 # weight assigned to that check
 weights:
 
-    # How many PKs will a player score in case of a Reflex kick for KillAura?
-    killaura: 1
+  # How many PKs will a player score in case of a Reflex kick for KillAura?
+  killaura: 1
 
-    # How many PKs will a player score in case of a Reflex kick for Criticals?
-    criticals: 2
+  # How many PKs will a player score in case of a Reflex kick for Criticals?
+  criticals: 2
 
-    # How many PKs will a player score in case of a Reflex kick for AntiKnockback?
-    antiknockback: 2
+  # How many PKs will a player score in case of a Reflex kick for AntiKnockback?
+  antiknockback: 2
 
-    # How many PKs will a player score in case of a Reflex kick for BlockActions?
-    blockactions: 2
+  # How many PKs will a player score in case of a Reflex kick for BlockActions?
+  blockactions: 2
 
-    # How many PKs will a player score in case of a Reflex kick for BadPackets?
-    badpackets: 1
+  # How many PKs will a player score in case of a Reflex kick for BadPackets?
+  badpackets: 1
 
-    # How many PKs will a player score in case of a Reflex kick for InvActions?
-    invactions: 1
+  # How many PKs will a player score in case of a Reflex kick for InvActions?
+  invactions: 1
+
+  # How many PKs will a player score in case of a Reflex kick for VehicleMove?
+  vehiclemove: 2
+
+  # How many PKs will a player score in case of a Reflex kick for ElytraMove?
+  elytramove: 2
 
 # Used when calculating the number of PKs to score after a potential kick.
 # If at the moment of new PK there have been less than {double_weight_rate}
 # seconds from the previous one, the number of PKs scored will be doubled.
 # Used to ban blatant cheaters who get kicked very often slightly faster
-double_weight_rate: 45
+double_weight_rate: 30
+
+# Enable this if you want Reflex's machine learning check to ban faster
+# in case it's {double_weight_confidence}+% sure that a player is cheating.
+# This works by checking the "conviction" percent shown in Reflex verbose
+# after getting flagged by the machine learning check. If that percent is
+# greater than or equal to the number specified below, the number of PKs
+# ReflexAutoban will score will be doubled. (!) RECOMMENDED AT LEAST 75!
+# Note that this setting will be ignored if double_weight_rate is triggered
+double_weight_confidence: 9999
 
 # Global PKs reducement schedule settings
 pk_decay:
@@ -125,7 +154,7 @@ pk_decay:
   # For example, if set to 5, and a player gets 1 (one) PK, then that PK
   # will be removed and the total number of PKs for that player will be
   # set to 0 after five minutes. NOTE: no decimals (e.g. `2.5`) allowed!
-  period: 10
+  period: 15
 
   # If a player has got any potential kicks in the last {penalty} minutes,
   # then they are excluded from decaying, and their number of PKs is kept

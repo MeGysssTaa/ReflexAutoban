@@ -19,9 +19,8 @@ package rip.reflex.autoban.util.placeholders;
 import org.bukkit.entity.Player;
 import rip.reflex.api.ReflexAPI;
 import rip.reflex.autoban.banwave.MissingPlayer;
-import rip.reflex.autoban.util.time.Now;
 import rip.reflex.autoban.util.str.Strings;
-import rip.reflex.util.performance.LagStatus;
+import rip.reflex.autoban.util.time.Now;
 
 /**
  * Used to apply Reflex and ReflexAutoban placeholders to
@@ -43,7 +42,7 @@ public class PlaceholderApplicator {
             replace("%tps%", reflex.getTps()).
             replace("%break%", "\n").
             replace("%lp%", (missing) ? -1 : reflex.getLagPoints(p)).
-            replace("%lagstatus%", (missing) ? LagStatus.NOT_ESTIMATED : reflex.getLagStatus(p).fancyName()).
+            replace("%lagstatus%", (missing) ? "not estimated" : reflex.getLagStatus(p)).
             replace("%date%", Now.date()).
             replace("%time%", Now.time());
 

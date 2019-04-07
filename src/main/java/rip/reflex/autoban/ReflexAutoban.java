@@ -43,7 +43,7 @@ public class ReflexAutoban extends JavaPlugin {
     /**
      * The Reflex API version we can work with
      */
-    public static final int API_VERSION = 4;
+    public static final int API_VERSION = 6;
 
     /**
      * The maximal amount of threads our asynchronous executor is allowed to produce.
@@ -51,7 +51,7 @@ public class ReflexAutoban extends JavaPlugin {
      * thread count. The limit only exist in order to prevent infinite thread
      * reduplication in case of some critical performance issue.
      */
-    private static final int MAX_THREAD_COUNT = 12;
+    private static final int MAX_THREAD_COUNT = 5;
 
     /**
      * Public access for non-static methods of this class
@@ -132,7 +132,7 @@ public class ReflexAutoban extends JavaPlugin {
     /**
      * Initialize everything that wasn't initialized on enable
      */
-    public void finishInit() {
+    void finishInit() {
         // Register commands
         ReflexCommand.register(new CommandRab());
 

@@ -36,12 +36,19 @@ public class Files {
      * @param f The file to check.
      */
     public static void ensureExists(final File f) {
-        File parent = f;
+        if (f.getName().contains("."))
+            // Probably a file
+            f.getParentFile().mkdirs();
+        else
+            // Probably a directory
+            f.mkdirs();
 
-        if ((!(f.exists())) && (Strings.replace(f.getName(), "\\", "/").endsWith("/"))) f.mkdirs();
-        while ((parent = parent.getParentFile()) != null)
-            if (!(parent.exists()))
-        parent.mkdirs();
+//        File parent = f;
+//
+//        if ((!(f.exists())) && (Strings.replace(f.getName(), "\\", "/").endsWith("/"))) f.mkdirs();
+//        while ((parent = parent.getParentFile()) != null)
+//            if (!(parent.exists()))
+//        parent.mkdirs();
     }
 
     /**
@@ -73,9 +80,7 @@ public class Files {
     public static void write(final File f, final String text) {
         try (final FileWriter fw = new FileWriter(f, true)) {
             fw.write(text + '\n');
-
             fw.flush();
-            fw.close();
         } catch (final Exception ex) {
             throw new RuntimeException(String.format("Failed to write %s to '%s'",
                     (text.length() > 50) ? text.length() + " chars" : "'" + text + "'", f.getAbsolutePath()), ex);

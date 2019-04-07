@@ -52,7 +52,6 @@ public class ActionInterpreter {
 
         final String fOp = actions.get(0).getOp();
 
-        //noinspection IfCanBeSwitch
         if (fOp.equals(ALL_SYNC))
             Bukkit.getScheduler().runTask(ReflexAutoban.getInstance(), this::run0);
         else if (fOp.equals(ALL_ASYNC))
