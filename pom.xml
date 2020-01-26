@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2019 DarksideCode
+  ~ Copyright 2020 DarksideCode
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 
     <groupId>rip.reflex</groupId>
     <artifactId>ReflexAutoban</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
     <build>
         <plugins>
             <plugin>
