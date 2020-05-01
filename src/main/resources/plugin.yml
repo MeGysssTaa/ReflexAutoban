@@ -3,7 +3,7 @@ main: rip.reflex.autoban.ReflexAutoban
 description: An official Reflex add-on for better autobaning
 depend: [Reflex]
 author: DarksideCode
-version: 2.1.0
+version: 2.2.0
 commands:
   rab:
     description: ReflexAutoban commands
