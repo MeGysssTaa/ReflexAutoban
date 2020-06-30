@@ -72,6 +72,11 @@
             <id>placeholderapi</id>
             <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>reflex.public</id>
+            <name>Public Reflex Repository</name>
+            <url>https://archiva.reflex.rip/repository/public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -107,8 +112,7 @@
         <dependency>
             <groupId>rip.reflex</groupId>
             <artifactId>ReflexAPI</artifactId>
-            <version>6</version>
-            <scope>provided</scope>
+            <version>7</version>
         </dependency>
     </dependencies>
 
