@@ -113,6 +113,7 @@
             <groupId>rip.reflex</groupId>
             <artifactId>ReflexAPI</artifactId>
             <version>7</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
