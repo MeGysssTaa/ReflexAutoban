@@ -17,14 +17,13 @@
 package rip.reflex.autoban.api.event;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 /**
  * Fired to indicate that ReflexAutoban has fully started.
  */
-@RequiredArgsConstructor
 public class ReflexAutobanLoadEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
@@ -34,6 +33,13 @@ public class ReflexAutobanLoadEvent extends Event {
 
     @Getter
     private final int apiVersion;
+
+    public ReflexAutobanLoadEvent(String version, int apiVersion) {
+        super(!Bukkit.isPrimaryThread());
+
+        this.version = version;
+        this.apiVersion = apiVersion;
+    }
 
     public static HandlerList getHandlerList() {
         return handlers;

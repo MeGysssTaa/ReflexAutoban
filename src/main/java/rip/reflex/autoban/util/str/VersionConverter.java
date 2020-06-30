@@ -64,6 +64,7 @@ public class VersionConverter {
         map.put(393, "1.13");
         map.put(477, "1.14");
         map.put(573, "1.15");
+        map.put(735, "1.16");
     }
 
 }
