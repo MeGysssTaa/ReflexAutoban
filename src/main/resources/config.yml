@@ -112,22 +112,22 @@ weights:
   killaura: 1
 
   # How many PKs will a player score in case of a Reflex kick for Criticals?
-  criticals: 2
+  criticals: 3
 
   # How many PKs will a player score in case of a Reflex kick for AntiKnockback?
   antiknockback: 2
 
   # How many PKs will a player score in case of a Reflex kick for BlockActions?
-  blockactions: 2
+  blockactions: 3
 
   # How many PKs will a player score in case of a Reflex kick for BadPackets?
-  badpackets: 1
+  badpackets: 2
 
   # How many PKs will a player score in case of a Reflex kick for InvActions?
   invactions: 1
 
   # How many PKs will a player score in case of a Reflex kick for VehicleMove?
-  vehiclemove: 2
+  vehiclemove: 3
 
   # How many PKs will a player score in case of a Reflex kick for ElytraMove?
   elytramove: 2
